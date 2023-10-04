@@ -75,7 +75,6 @@
 (require 'init-whitespace)
 
 (require 'init-vc)
-(require 'init-darcs)
 (require 'init-git)
 (require 'init-github)
 
@@ -113,31 +112,19 @@
 (require 'init-nix)
 (maybe-require-package 'nginx-mode)
 
-(require 'init-paredit)
 (require 'init-lisp)
-(require 'init-slime)
-(require 'init-clojure)
-(require 'init-clojure-cider)
 (require 'init-common-lisp)
 
-(when *spell-check-support-enabled*
-  (require 'init-spelling))
+(require 'init-spelling)
 
 (require 'init-misc)
 
 (require 'init-folding)
-(require 'init-dash)
 
-(require 'init-ledger)
 (require 'init-lua)
 
 ;; Extra packages which don't require any configuration
 
-(require-package 'sudo-edit)
-(require-package 'gnuplot)
-(require-package 'htmlize)
-(when *is-a-mac*
-  (require-package 'osx-location))
 (maybe-require-package 'dotenv-mode)
 (maybe-require-package 'shfmt)
 

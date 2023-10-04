@@ -182,21 +182,6 @@
   (with-eval-after-load 'page-break-lines
     (diminish 'page-break-lines-mode)))
 
-
-
-;; Shift lines up and down with M-up and M-down. When paredit is enabled,
-;; it will use those keybindings. For this reason, you might prefer to
-;; use M-S-up and M-S-down, which will work even in lisp modes.
-
-(require-package 'move-dup)
-(global-set-key [M-up] 'move-dup-move-lines-up)
-(global-set-key [M-down] 'move-dup-move-lines-down)
-(global-set-key [M-S-up] 'move-dup-move-lines-up)
-(global-set-key [M-S-down] 'move-dup-move-lines-down)
-
-(global-set-key (kbd "C-c d") 'move-dup-duplicate-down)
-(global-set-key (kbd "C-c u") 'move-dup-duplicate-up)
-
 
 ;;; Fix backward-up-list to understand quotes, see http://bit.ly/h7mdIL
 

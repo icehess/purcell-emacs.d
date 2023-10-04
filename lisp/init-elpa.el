@@ -118,5 +118,42 @@ advice for `require-package', to which ARGS are passed."
 (add-hook 'package-menu-mode-hook 'sanityinc/maybe-widen-package-menu-columns)
 
 
+;; HACK: DO NOT save package-selected-packages to `custom-file'.
+;; https://github.com/jwiegley/use-package/issues/383#issuecomment-247801751
+(defun my-package--save-selected-packages (&optional value)
+  "Set `package-selected-packages' to VALUE but don't save to option `custom-file'."
+  (when value
+    (setq package-selected-packages value))
+  (unless after-init-time
+    (add-hook 'after-init-hook #'my-package--save-selected-packages)))
+(advice-add 'package--save-selected-packages :override #'my-package--save-selected-packages)
+
+
+;;; Fire up package.el
+(unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
+  (setq package-enable-at-startup nil)          ; To prevent initializing twice
+  (package-initialize))
+
+;; Setup `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; Should set before loading `use-package'
+;; (setq use-package-always-ensure t
+;;       use-package-always-defer t
+;;       use-package-expand-minimally t
+;;       use-package-enable-imenu-support t)
+(setq use-package-always-ensure t
+      use-package-always-defer t
+      use-package-verbose t
+      use-package-expand-minimally nil
+      use-package-compute-statistics t
+      use-package-enable-imenu-support t
+      debug-on-error t)
+
+;; Required by `use-package'
+(use-package diminish :ensure t)
+
 (provide 'init-elpa)
 ;;; init-elpa.el ends here
