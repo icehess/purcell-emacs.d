@@ -3,6 +3,8 @@
 (require 'init-elixir)
 (require 'init-c)
 
+(require-package 'gruvbox-theme)
+(setq custom-enabled-themes '(gruvbox-dark-hard))
 
 ;; Fonts
 (defun centaur-setup-fonts ()
